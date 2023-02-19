@@ -1,25 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import YodlrRoutes from './Routes';
+import NavBar from './NavBar';
+import YodlrApi from './Api';
+// import { useEffect, useState } from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const createNewUser = async (data) => {
+		let response = await YodlrApi.createNewUser(data);
+		console.log(response);
+		// if (response.token) {
+		// 	setValue({ token: response.token, username: username });
+		// 	return true;
+		// } else {
+		// 	return response;
+		// }
+	};
+
+	return (
+		<div className="App">
+			<BrowserRouter>
+				<NavBar />
+				<main>
+					<YodlrRoutes createNewUser={createNewUser} />
+				</main>
+			</BrowserRouter>
+		</div>
+	);
 }
 
 export default App;
