@@ -11,6 +11,9 @@ var users = require('./routes/users');
 var app = express();
 var log = logger(app);
 
+var cors = require('cors');
+
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

@@ -9,12 +9,11 @@ function App() {
 	const createNewUser = async (data) => {
 		let response = await YodlrApi.createNewUser(data);
 		console.log(response);
-		// if (response.token) {
-		// 	setValue({ token: response.token, username: username });
-		// 	return true;
-		// } else {
-		// 	return response;
-		// }
+		if (response) {
+			return true;
+		} else {
+			return response;
+		}
 	};
 
 	return (

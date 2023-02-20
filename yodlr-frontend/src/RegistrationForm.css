@@ -1,0 +1,36 @@
+h1 {
+	font-family: 'Pacifico', cursive;
+}
+
+.FormContainer {
+	margin-top: 6rem;
+	border-radius: 1rem;
+	background-color: #ff9505;
+	color: white;
+}
+
+.Email,
+.Firstname,
+.Lastname {
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+
+.Email,
+.Firstname,
+.Lastname,
+.SignupButton,
+h1 {
+	margin-top: 1rem;
+}
+
+.SignupButton {
+	margin-bottom: 1rem;
+	background-color: #ffb627;
+	border-width: 0.2rem;
+	border-color: white;
+}
+
+.SignupButton:hover {
+	background-color: #ff9505;
+}

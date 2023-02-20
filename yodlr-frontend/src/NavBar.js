@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import './NavBar.css';
 
 function NavBar() {
 	const [ collapsed, setCollapsed ] = useState(true);
@@ -8,7 +9,7 @@ function NavBar() {
 
 	return (
 		<div>
-			<Navbar color="faded" light>
+			<Navbar light>
 				<NavbarBrand href="/" className="me-auto">
 					yodlr
 				</NavbarBrand>

@@ -2,8 +2,9 @@ import { Input, Button, Form, FormGroup, Col, Container } from 'reactstrap';
 import { useForm, Controller } from 'react-hook-form';
 import { useState } from 'react';
 import Alert from './Alert';
+import './RegistrationForm.css';
 
-const RegistrationForm = ({ creatNewUser }) => {
+const RegistrationForm = ({ createNewUser }) => {
 	const [ response, setResponse ] = useState(false);
 	const { control, handleSubmit, reset } = useForm({
 		defaultValues: {
@@ -14,7 +15,7 @@ const RegistrationForm = ({ creatNewUser }) => {
 	});
 
 	const onSubmit = async (data) => {
-		let success = await creatNewUser(data);
+		let success = await createNewUser(data);
 		if (success === true) {
 			setResponse(true);
 		} else {
@@ -34,7 +35,7 @@ const RegistrationForm = ({ creatNewUser }) => {
 						sm="12"
 					>
 						<div className="FormContainer">
-							<h1>Signup to Yodlr Portal</h1>
+							<h1>Signup To The Yodlr Portal</h1>
 							<div className="Email">
 								<Controller
 									name="email"
@@ -56,7 +57,10 @@ const RegistrationForm = ({ creatNewUser }) => {
 									render={({ field }) => <Input placeholder="Lastname" {...field} />}
 								/>
 							</div>
-							{response !== false ? <Alert type="danger" message={response[0]} /> : null}
+							{response === true ? <Alert type={'success'} message="Signed up successfully." /> : null}
+							{response !== false && response !== true ? (
+								<Alert type="danger" message="Something went wrong." />
+							) : null}
 							<Button className="SignupButton" type="submit" size="lg">
 								Submit
 							</Button>

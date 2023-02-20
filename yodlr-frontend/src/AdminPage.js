@@ -1,18 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Table, FormGroup, Input, Button } from 'reactstrap';
+import { Table } from 'reactstrap';
 import YodlrApi from './Api';
+import User from './User';
 
 const AdminPage = () => {
-	const [ users, setUsers ] = useState();
+	const [ deleted, setDeleted ] = useState(0);
+	const [ users, setUsers ] = useState([]);
 
-	console.log(users);
-	useEffect(() => {
-		async function getAllUsers() {
-			let users = await YodlrApi.getAllUsers();
-			setUsers(users);
-		}
-		getAllUsers();
-	}, []);
+	useEffect(
+		() => {
+			async function getAllUsers() {
+				let users = await YodlrApi.getAllUsers();
+				setUsers(Object.values(users));
+			}
+			getAllUsers();
+		},
+		[ deleted ]
+	);
+
+	const deleteUser = async (id) => {
+		await YodlrApi.deleteUser(id);
+		setDeleted(deleted + 1);
+	};
 
 	return (
 		<div>
@@ -23,48 +32,11 @@ const AdminPage = () => {
 						<th>First Name</th>
 						<th>Last Name</th>
 						<th>Email</th>
-						<th>Delete User</th>
 						<th>Toggle State</th>
+						<th>Delete User</th>
 					</tr>
 				</thead>
-				<tbody>
-					{/* <tr>
-						<th scope="row">1</th>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>@mdo</td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Jacob</td>
-						<td>Thornton</td>
-						<td>@fat</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>Larry</td>
-						<td>the Bird</td>
-						<td>@twitter</td>
-					</tr> */}
-					{/* {users.map((u) => {
-						<tr>
-							<th scope="row">{u.id}</th>
-							<td>{u.firstName}</td>
-							<td>{u.lastName}</td>
-							<td>{u.email}</td>
-							<td>
-								<FormGroup switch>
-									<Input type="switch" role="switch" />
-								</FormGroup>
-							</td>
-							<td>
-								<Button color="danger" size="sm">
-									Delete
-								</Button>
-							</td>
-						</tr>;
-					})} */}
-				</tbody>
+				<tbody>{users.map((u) => <User key={u.id} user={u} deleteUser={deleteUser} />)}</tbody>
 			</Table>
 		</div>
 	);
