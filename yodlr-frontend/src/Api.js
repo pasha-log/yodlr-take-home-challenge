@@ -39,7 +39,7 @@ class YodlrApi {
 	// 	await this.request(`${BASE_API_URL}/`, data, 'post');
 	// }
 	static async createNewUser(data) {
-		await axios.post(`${BASE_API_URL}/`, {
+		return await axios.post(`${BASE_API_URL}/`, {
 			email: `${data.email}`,
 			firstName: `${data.firstName}`,
 			lastName: `${data.lastName}`
@@ -48,17 +48,32 @@ class YodlrApi {
 
 	// deletes user from admin page
 	static async deleteUser(id) {
-		await axios.delete(`${BASE_API_URL}/${id}`);
+		return await axios.delete(`${BASE_API_URL}/${id}`);
 	}
 
 	static async updateUserStatus(user, status) {
-		await axios.put(`${BASE_API_URL}/${user.id}`, {
-			id: `${user.id}`,
-			email: `${user.email}`,
-			firstName: `${user.firstName}`,
-			lastName: `${user.lastName}`,
-			state: `${status}`
-		});
+		return status === 'pending'
+			? await axios.put(`${BASE_API_URL}/${user.id}`, {
+					id: `${user.id}`,
+					email: `${user.email}`,
+					firstName: `${user.firstName}`,
+					lastName: `${user.lastName}`,
+					state: 'active'
+				})
+			: await axios.put(`${BASE_API_URL}/${user.id}`, {
+					id: `${user.id}`,
+					email: `${user.email}`,
+					firstName: `${user.firstName}`,
+					lastName: `${user.lastName}`,
+					state: 'pending'
+				});
+		// return await axios.put(`${BASE_API_URL}/${user.id}`, {
+		// 	id: `${user.id}`,
+		// 	email: `${user.email}`,
+		// 	firstName: `${user.firstName}`,
+		// 	lastName: `${user.lastName}`,
+		// 	state: `${status}`
+		// });
 	}
 }
 

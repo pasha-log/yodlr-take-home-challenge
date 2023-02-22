@@ -1,20 +1,6 @@
-import { useState } from 'react';
 import { Form, FormGroup, Input, Button, Label } from 'reactstrap';
-import YodlrApi from './Api';
 
-const User = ({ user, deleteUser }) => {
-	const [ status, setStatus ] = useState(false);
-
-	const updateUserStatus = async (user, state) => {
-		await YodlrApi.updateUserStatus(user, state);
-		// setStatus(user.state);
-	};
-
-	// function handleSubmit(e) {
-	// 	e.preventDefault();
-	// 	return user.state === 'pending' ? updateUserStatus(user, 'pending') : updateUserStatus(user, 'active');
-	// }
-
+const User = ({ user, deleteUser, updateUserStatus }) => {
 	return (
 		<tr key={user.id}>
 			<th scope="row">{user.id}</th>
@@ -24,14 +10,11 @@ const User = ({ user, deleteUser }) => {
 			<td>
 				<Form>
 					<FormGroup switch>
-						{/* <Input type="switch" role="switch" /> */}
-						<Input
-							type="switch"
-							checked={status}
-							onClick={() => {
-								setStatus(!status);
-							}}
-						/>
+						{user.state === 'pending' ? (
+							<Input type="switch" checked={false} onChange={() => updateUserStatus(user, user.state)} />
+						) : (
+							<Input type="switch" checked={true} onChange={() => updateUserStatus(user, user.state)} />
+						)}
 						<Label check>{user.state}</Label>
 					</FormGroup>
 				</Form>

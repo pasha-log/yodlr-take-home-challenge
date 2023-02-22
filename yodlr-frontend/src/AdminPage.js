@@ -5,6 +5,7 @@ import User from './User';
 
 const AdminPage = () => {
 	const [ deleted, setDeleted ] = useState(0);
+	const [ updated, setUpdated ] = useState(0);
 	const [ users, setUsers ] = useState([]);
 
 	useEffect(
@@ -15,12 +16,20 @@ const AdminPage = () => {
 			}
 			getAllUsers();
 		},
-		[ deleted ]
+		[ deleted, updated ]
 	);
 
 	const deleteUser = async (id) => {
 		await YodlrApi.deleteUser(id);
 		setDeleted(deleted + 1);
+	};
+
+	const updateUserStatus = async (user, state) => {
+		let response = await YodlrApi.updateUserStatus(user, state);
+		if (response) {
+			console.log(response);
+			setUpdated(updated + 1);
+		}
 	};
 
 	return (
@@ -36,7 +45,11 @@ const AdminPage = () => {
 						<th>Delete User</th>
 					</tr>
 				</thead>
-				<tbody>{users.map((u) => <User key={u.id} user={u} deleteUser={deleteUser} />)}</tbody>
+				<tbody>
+					{users.map((u) => (
+						<User key={u.id} user={u} deleteUser={deleteUser} updateUserStatus={updateUserStatus} />
+					))}
+				</tbody>
 			</Table>
 		</div>
 	);
