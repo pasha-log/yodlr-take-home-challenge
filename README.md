@@ -1,6 +1,6 @@
 # Yodlr Frontend Take Home Challenge
 
-<img src='./public/yodlr-form.png' alt=''>
+<img src='./yodlr-frontend/public/yodlr-form.png' alt=''>
 
 ## Description: 
 
@@ -8,7 +8,7 @@ This was a mock take home challenge where I was provided a backend directory tha
 
 The challenge was to create a simple registration page and an admin page that showed all users. For more details, read the [backend read me](https://github.com/pasha-log/yodlr-take-home-challenge/blob/main/yodlr-backend/README.md).
 
-<img src='./public/yodlr-table.png' alt=''>
+<img src='./yodlr-frontend/public/yodlr-table.png' alt=''>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
