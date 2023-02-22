@@ -5,7 +5,7 @@ import Alert from './Alert';
 import './RegistrationForm.css';
 
 const RegistrationForm = ({ createNewUser }) => {
-	const [ response, setResponse ] = useState(false);
+	const [ response, setResponse ] = useState();
 	const { control, handleSubmit, reset } = useForm({
 		defaultValues: {
 			email: '',
@@ -16,12 +16,8 @@ const RegistrationForm = ({ createNewUser }) => {
 
 	const onSubmit = async (data) => {
 		let success = await createNewUser(data);
-		if (success === true) {
-			setResponse(true);
-		} else {
-			setResponse(success);
-			reset();
-		}
+		success === true ? setResponse(true) : setResponse(success);
+		reset();
 	};
 	return (
 		<Container>
@@ -58,8 +54,8 @@ const RegistrationForm = ({ createNewUser }) => {
 								/>
 							</div>
 							{response === true ? <Alert type={'success'} message="Signed up successfully." /> : null}
-							{response !== false && response !== true ? (
-								<Alert type="danger" message="Something went wrong." />
+							{response === false && response !== true ? (
+								<Alert type="danger" message="You're missing something." />
 							) : null}
 							<Button className="SignupButton" type="submit" size="lg">
 								Submit

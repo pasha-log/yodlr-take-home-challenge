@@ -1,0 +1,10 @@
+.alert-success,
+.alert-danger {
+	margin-top: 1rem;
+}
+
+.alert-success,
+.alert-danger {
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
